@@ -1,6 +1,4 @@
 # -*- coding: utf-8 -*-
-#import pytest
-#from data.groups import test_data
 from model.project import Project
 #import time
 import string

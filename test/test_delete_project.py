@@ -13,8 +13,3 @@ def test_delete_project(appl, db):
     new_list = db.get_project_list()
     old_list.remove(project)
     assert old_list == new_list
-    #if check_ui:
-    #    def clean(group):
-    #        return Group(_id=group.id, _name=appl.clear_dobble_space(group.name.strip()))
-    #    new_group_list_ui = appl.group.get_group_list()
-    #    assert sorted(map(clean, new_group_list), key=appl.sorted_by_id) == sorted(new_group_list_ui, key=appl.sorted_by_id)
