@@ -47,10 +47,18 @@ class App:
         wd = self.wd
         return wd.find_element_by_name(name).get_attribute("value")
 
-
-    def click_button(self, name):
+    def set_select_field(self, name, value):
         wd = self.wd
-        wd.find_element_by_name(name).click()
+        wd.find_element_by_xpath("//select[@name='" + name + "']/option[text()='" + value + "']").click()
+
+    def click_button(self, name=None, value=None):
+        wd = self.wd
+        if name is not None:
+            wd.find_element_by_name(name).click()
+        elif value is not None:
+            wd.find_element_by_xpath("//input[@value='" + value + "']").click()
+        else:
+            print('set a button, please')
 
     def sorted_by_id(self, entity):
         if entity.id:
