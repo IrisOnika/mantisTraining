@@ -46,10 +46,28 @@ class projectHelper:
                 self.projectListCache.append(Project(_name=name, _id=id))
         return list(self.projectListCache)
 
+    def count(self):
+        wd = self.app.wd
+        self.open_projects_page()
+        project_table = wd.find_element_by_xpath("//table[tbody/tr/td/form/input[@value='Create New Project']]")
+        return len(project_table.find_elements_by_css_selector("tr.row-1")+project_table.find_elements_by_css_selector("tr.row-2"))
 
 
+    def delete_project_by_id(self, id):
+        self.open_projects_page()
+        self.open_project_by_id(id)
+        self.delete_project_acception()
+        self.open_projects_page()
+        self.groupListCache = None
 
+    def open_project_by_id(self, id):
+        wd = self.app.wd
+        project_table = wd.find_element_by_xpath("//table[tbody/tr/td/form/input[@value='Create New Project']]")
+        project_table.find_element_by_xpath("//td/a[@href='manage_proj_edit_page.php?project_id=" +id +"']").click()
 
+    def delete_project_acception(self):
+        self.app.click_button(value="Delete Project")
+        self.app.click_button(value="Delete Project")
 
 
 
@@ -121,8 +139,4 @@ class projectHelper:
         if not wd.find_element_by_css_selector("input[value='%s']" % id).is_selected():
             wd.find_element_by_css_selector("input[value='%s']" % id).click()
 
-    def count(self):
-        wd = self.app.wd
-        self.app.navigation.openMenu("groups")
-        return len(wd.find_elements_by_name("selected[]"))
 
