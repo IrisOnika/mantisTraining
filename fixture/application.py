@@ -3,6 +3,7 @@ from selenium import webdriver
 from fixture.session import sessionHelper
 from fixture.project import projectHelper
 from fixture.navigation import navigationHelper
+from fixture.soap import soapHelper
 from sys import maxsize
 import re
 import random
@@ -25,6 +26,7 @@ class App:
         self.project = projectHelper(self)
         self.navigation = navigationHelper(self)
         self.base_url = base_url
+        self.soap = soapHelper(self)
 
     def is_valid(self):
         try:
